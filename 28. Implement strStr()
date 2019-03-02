@@ -1,0 +1,37 @@
+class Solution {
+public:
+    int strStr(string haystack, string needle) {
+        
+        //needle为空字符串时，返回0
+        if(needle.length() == 0) return 0;
+        
+        //如果haystack为空或者needle字符串更长，返回-1
+        if(haystack.length() == 0 || (needle.length() > haystack.length())) return -1;
+        
+        //寻找匹配字符串，从haystack第一个字符开始，寻找与needle匹配的子串
+        //从i开始寻找haystack，j开始对比needle，k标记开始匹配的位置
+        int j=0,k;
+        for(int i=0; i<haystack.length(); ++i){
+            //
+            if(haystack[i] == needle[0]){
+                k=i;
+                //开始匹配,从i位置开始匹配字符串needle
+                while(1){
+                    if(j == needle.length()){
+                        //匹配完成，成功,返回匹配开始的位置k
+                        return k;
+                    }else if(haystack[i] != needle[j]){
+                        //此字符匹配失败，复位i、j，重新寻找匹配
+                        i = k;
+                        j = 0;
+                        break;
+                    }else{
+                        //此字符匹配成功，继续比对下一个字符
+                        i++,j++;
+                    }
+                } 
+            }
+        }
+        return -1;
+    }
+};
