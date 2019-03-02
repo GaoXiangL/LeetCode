@@ -1,0 +1,30 @@
+class Solution {
+public:
+    int lengthOfLastWord(string s) {
+        
+        //空串返回0
+        if(s.length() == 0) return 0;
+        
+
+        //从最后一个字母开始，遇到空格返回
+        int count = 0;
+        int i;
+        
+        //过掉最后一个单词后的空格
+        for(i = s.length()-1; i >=0; i--){
+            if(s[i] == ' ') continue;
+            else break;
+        }
+        
+        for(; i >= 0; i--){
+            if(s[i] == ' '){
+                return count;
+            }else{
+                count++;
+            }
+        }
+        
+        if(i < 0) return count;
+        return 0;
+    }
+};
