@@ -1,0 +1,27 @@
+class Solution {
+public:
+    int removeDuplicates(vector<int>& nums) {
+        
+        //输入为空直接返回0
+        if(nums.size() == 0) return 0;
+        
+        //设置快慢指针，快指针j找值，慢指针i覆盖
+        int i=0,j=1; 
+        
+        while(j<nums.size()){
+            
+            if(nums[i] == nums[j]){
+                //相等元素，将j向后找不同元素
+                j++;
+            }else{
+                //不同元素，直接覆盖
+                nums[++i] = nums[j];
+                j++;
+            }
+            
+        }
+        
+        return i+1;
+        
+    }
+};
