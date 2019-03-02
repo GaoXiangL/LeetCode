@@ -1,0 +1,53 @@
+class Solution {
+public:
+    string countAndSay(int n) {
+        
+        if(n == 1) return "1";
+        
+        if(n == 2) return "11";
+        
+        string str = "11";  //以第3行、n=3作为起点，初始化str为此行整数序列
+        
+        for(int i = 2; i < n; i++){
+            
+            //从第0.1.2开始，到第n-1次
+            
+            string temp;  //用于每次循环制作下一行的序列
+            int count = 0;  //记录第count个x
+            char x = str[0];    //和前一个数比较
+            
+            for(int j = 0; j < str.length(); j++){
+            	
+            	//最后一个元素相同，合并添加 
+            	if(str[j] == x && j == str.length() - 1){
+            		stringstream aa;
+            		string aaa;
+            		count++;
+            		aa << count;
+            		aa >> aaa;
+            		temp = temp + aaa;
+            		temp = temp + x;
+            		break;
+				}
+                
+                //遍历此行整数序列str
+                if(str[j] == x){
+                    count++;
+                }else{
+                    //将count、x添加到字符串末尾
+                    stringstream aa;
+                    string aaa;
+                    aa << count;
+                    aa >> aaa;
+                    temp = temp + aaa;
+                    temp = temp + x;
+                    x = str[j];
+                    j--;
+                    count = 0;
+                }
+            }
+            str = temp;
+        }
+        return str;
+    }
+};
