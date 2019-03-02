@@ -1,0 +1,30 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    bool isBalanced(TreeNode* root) {
+        
+        //空树为真
+        if(root == NULL) return true;
+        
+        //遇上不平衡的判为假
+        if(abs(getdepth(root->left)-getdepth(root->right))>1) return false;
+        
+        //否则递归判断左右字数
+        return isBalanced(root->left) && isBalanced(root->right);
+        
+    }
+    
+    int getdepth(TreeNode* root){
+        if(!root) return 0;
+        return max(getdepth(root->left),getdepth(root->right))+1;
+    }
+    
+};
