@@ -1,0 +1,45 @@
+class Solution {
+public:
+string longestCommonPrefix(vector<string>& strs) {
+       
+       //先判断特殊情况：无内容与仅一个单词，返回空与单词本身 
+
+       if(strs.size()==1){
+       		return strs[0];
+	   } else if(strs.size()==0){
+	   		return "";
+	   }
+       
+       string temp= strs[0];	//保存公共前缀 
+       
+       //遍历输入的第2到n个单词 
+	   for(int i=1; i<strs.size(); i++){
+	   		
+	   		if(strs[i].empty()) return "";	//若有空单词，则返回空 
+	   		
+	   		string str;	//保存此次查找到的公共前缀 
+	   		
+	   		auto s1 = temp.begin();
+	   		auto s2 = strs[i].begin();
+	
+	   		while (s1!=temp.end() && s2!=strs[i].end()){
+	   			
+	   			if(*s1==*s2){
+	   				
+	   				str.push_back(*s1);
+	   				s1++;
+	   				s2++;
+	   				
+				}else{
+					break;
+				}
+	   			
+			}
+			
+			temp = str;	//更新公共前缀 
+
+	   }
+	   return temp; 
+
+} 
+};
