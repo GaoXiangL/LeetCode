@@ -1,0 +1,31 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    TreeNode* sortedArrayToBST(vector<int>& nums) {
+
+        if(nums.size() == 0) return NULL;
+        
+        //取中间的作为根节点
+        TreeNode *root=new TreeNode(nums[nums.size()/2]);
+        
+        //分为左右数组
+        vector<int> left,right;
+        left.insert(left.begin(),nums.begin(),nums.begin()+nums.size()/2);
+        right.insert(right.begin(),nums.begin()+nums.size()/2+1,nums.end());
+        root->left=sortedArrayToBST(left);
+        root->right=sortedArrayToBST(right);
+        
+        return root;
+        
+    }
+    
+    
+};
