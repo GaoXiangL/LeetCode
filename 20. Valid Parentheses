@@ -1,0 +1,34 @@
+class Solution {
+public:
+    bool isValid(string s) {
+        
+        if(s.size()==0) return true;    //空字符串被认为是有效字符串
+        
+        if(s.size() % 2 != 0) return false; //若字符串为奇数，必定不匹配
+        
+        std::stack<char> st;    //初始化栈，用来匹配括号
+        
+        for(int i=0; i<s.size(); i++){
+            
+            char ch=s.at(i);
+            
+            if(ch=='(' || ch=='{' || ch == '['){
+                //左括号入栈
+                st.push(ch);
+            }
+            else if ( st.size() > 0 && ((ch == ')' && st.top() == '(') || (ch == ']' && st.top() == '[') || (ch == '}' && st.top() == '{'))  ){
+                st.pop();
+            }
+            else{
+                return false;
+            }
+
+        }
+                                                  
+        if(st.empty()) 
+            return true;
+        else
+            return false;
+
+    }
+};
