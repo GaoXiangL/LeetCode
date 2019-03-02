@@ -1,0 +1,27 @@
+class Solution {
+public:
+    int reverse(int x) {
+        int rev = 0;    //rev为反转后的数
+        
+        //思路：把最后一位放在第一位，然后取下一位
+        
+        //数值范围：-2147483648到2147483647
+        //溢出情况1:正数若其x10大于max或其乘以10等于max且最后一位大于7
+        //溢出情况2:负数若其x10小于min或其乘以10等于min且最后一位小于-8
+        
+        while (x!=0){
+            int pop = x % 10;   //pop为模拟入栈时的入栈的数，即最后一位
+            
+            x = x /10; 
+            
+            if(rev > INT_MAX /10 || (rev == INT_MAX /10 && pop > 7)) return 0;
+            if(rev < INT_MIN /10 || (rev == INT_MIN /10 && pop < -8)) return 0;
+            
+            rev = rev * 10 + pop;
+            
+        }
+        
+        return rev;
+        
+    }
+};
