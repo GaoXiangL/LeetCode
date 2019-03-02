@@ -1,0 +1,18 @@
+class Solution {
+public:
+    vector<int> getRow(int rowIndex) {
+        //利用滚动数组，从后向前计算下一行，避免覆盖需要使用的上一行数据
+        //处理到第二位
+        //最后在最后一位上压入1
+        vector<int> ans;
+        
+        for(int i=0; i<=rowIndex; i++){
+            for(int j=i-1; j>0; j--){
+                ans[j] = ans[j-1] + ans[j];
+            }
+            ans.push_back(1);
+        }
+        
+        return ans;
+    }
+};
