@@ -1,0 +1,59 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
+        
+        //一个为空，返回另一个
+        if(l1 == NULL) return l2;
+        if(l2 == NULL) return l1;
+        
+        ListNode *p = l1;  //p指向第一条链表
+        ListNode *q = l2;  //q指向第二条链表
+        ListNode *head = (l1->val > l2 -> val ? l2 : l1) ;     //head作为头指针，取L1和L2较小的结点开始
+        
+        while(p!=NULL && q!=NULL){
+            
+            //取小的值插入到head所指的链表中,
+            
+            if(p->val <= q->val){
+                
+                //当L1的值更小或者与L2相等的时候，将L2插入到L1的后面
+                //移动指针p,找到插入点
+                
+                while(p->next != NULL && p->next->val <= q->val ) p = p->next;
+                
+                //将q插入p之后
+                l2 = q->next;
+                q->next = p->next;
+                p->next = q;
+                q = l2;
+              
+
+            }
+            else{
+                
+                //当L1的值更大的时候，寻找L2上让p插入的位置
+                
+                while(q->next != NULL && q->next->val < p->val) q = q->next;
+                
+                //将p插入至q之后
+                l1 = p->next;
+                p->next = q->next;
+                q->next = p;
+                p = l1;
+
+            }
+
+        }
+        
+        return head;
+        
+    }
+};
