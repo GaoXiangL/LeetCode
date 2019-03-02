@@ -1,0 +1,28 @@
+class Solution {
+public:
+    int removeElement(vector<int>& nums, int val) {
+        
+        //数组无数值，无须删除直接返回
+        if (nums.size() == 0) return 0;
+        
+        //设i、j双指针，i记录不等于val的数的个数，j向下寻找可插入元素
+        int i=0,j=0;
+        
+        while(j<nums.size()){
+        	 
+        	if(nums[j] != val){
+        		//不等于val，放在数组前 
+        		nums[i++] = nums[j++];
+			}else{
+				//等于val，跳过
+				j++; 
+			}
+        	
+        	
+		} 
+		
+		return i;
+        
+      
+    }
+};
